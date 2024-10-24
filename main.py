@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+
 def get_input(prompt, default):
     user_input = input(prompt)
     return float(user_input) if user_input else default
@@ -15,11 +17,9 @@ y2 = lambda_2 / mu_2
 y = y1 + y2
 
 t_och_1 = y1 / (mu_1 * (1 - y1))
-
 t_sist_1 = t_och_1 + t_obsl_1
 
-t_och_2 = (1 / mu_2) * (((mu_2 / mu_1) * (y1 / (1 - y)) + y) / (1 - y)) / (1 / mu_2) # В ФОРМУЛЕ УПУСТИЛИ ЕЩЁ 1 / mu_2
-
+t_och_2 = (1 / mu_2) * (((mu_2 / mu_1) * (y1 / (1 - y)) + y) / (1 - y)) / (1 / mu_2)
 t_sist_2 = t_och_2 + (1 / mu_2)
 
 print(f"\ny1 = {y1:.1f}")
@@ -30,3 +30,14 @@ print(f"Среднее время пребывания в отключенном
 
 print(f"\nСреднее время ожидания в очереди заявки, не обладающей приоритетом, составит tоч.2 = {t_och_2:.2f} ч.")
 print(f"Среднее время пребывания в системе заявки, не обладающей приоритетом, составит tсист.2 = {t_sist_2:.2f} ч.")
+
+# Создание столбчатой диаграммы
+labels = ['tоч.1 (приоритет)', 'tсист.1 (приоритет)', 'tоч.2 (без приоритета)', 'tсист.2 (без приоритета)']
+values = [t_och_1, t_sist_1, t_och_2, t_sist_2]
+
+plt.bar(labels, values, color=['blue', 'lightblue', 'orange', 'lightcoral'])
+plt.ylabel('Время (ч)')
+plt.title('Сравнение средних времен ожидания и пребывания в системе')
+plt.ylim(0, max(values) + 1)  # Увеличиваем верхнюю границу для лучшей визуализации
+plt.grid(axis='y')
+plt.show()
