@@ -1,7 +1,11 @@
-lambda_1 = 0.1
-lambda_2 = 0.2
-t_obsl_1 = 1
-t_obsl_2 = 2.5
+def get_input(prompt, default):
+    user_input = input(prompt)
+    return float(user_input) if user_input else default
+
+lambda_1 = get_input("Лямбда 1 (по умолчанию 0.1. Просто нажмите Enter): ", 0.1)
+lambda_2 = get_input("Лямбда 2 (по умолчанию 0.2): ", 0.2)
+t_obsl_1 = get_input("tобсл.1 (по умолчанию 1): ", 1)
+t_obsl_2 = get_input("tобсл.2 (по умолчанию 2.5): ", 2.5)
 
 mu_1 = 1 / t_obsl_1
 mu_2 = 1 / t_obsl_2
@@ -18,7 +22,7 @@ t_och_2 = (1 / mu_2) * (((mu_2 / mu_1) * (y1 / (1 - y)) + y) / (1 - y)) / (1 / m
 
 t_sist_2 = t_och_2 + (1 / mu_2)
 
-print(f"y1 = {y1:.1f}")
+print(f"\ny1 = {y1:.1f}")
 print(f"y = {y:.1f}")
 
 print(f"\nСреднее время пребывания в очереди заявок, обладающих приоритетом составит tоч.1 = {t_och_1:.2f} ч.")
